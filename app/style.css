@@ -1,0 +1,34 @@
+
+
+.row.main{
+    padding: 20px;
+}
+
+#search {
+    margin-bottom: 10px;
+}
+
+.selected{
+    background-color: cadetblue;
+}
+
+#spinner{
+    visibility: collapse;
+    text-align: center;
+}
+
+#error{
+    visibility: collapse;
+}
+
+#chart{
+    width: 100%;
+    height: 600px;
+    margin: 0 auto;
+}
+
+.meter{
+    width: 100%;
+    height: 150px;
+    margin: 0 auto
+}

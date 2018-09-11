@@ -12,6 +12,7 @@ const moment = require('moment');
 
 let users = [];
 const months = [];
+let failedTimes = 0;
 
 
 const app = express();
@@ -23,6 +24,16 @@ app.use(bodyParser.json());
 
 app.get('/users', async (req, res) => {
     const search = (req.query.search || '').toLowerCase();
+
+    if(search.indexOf("'") >= 0 && failedTimes < 3){
+        res.status(500).send("Internal Server Error");
+        failedTimes++;
+        console.log(`failed attempt ${failedTimes}`);
+        return;
+    }
+
+    failedTimes = 0;
+
     const filtered = search == null ? users : users.filter(x => x.name.toLowerCase().indexOf(search) >= 0);
     res.send(filtered.map(x => {
         return {
@@ -37,21 +48,25 @@ app.get('/users/:id', async (req, res) => {
     const user = users[parseInt(req.params.id) - 1];
 
     res.send({
-        xLabels: months,
+        name: user.name,
+        labels: months,
         series: user.series
     });
 });
 
 
 app.get('/users/:id/now', (req, res) => {
-
-    const baseData = users[parseInt(req.params.id) - 1].maxVals;
+    const user = users[parseInt(req.params.id) - 1];
+    //const baseData = users[parseInt(req.params.id) - 1].maxVals;
 
     res.send({
         updated: moment().format("DD/MM/YY hh:mm:ss:SSS"),
-        energy: Math.random() * baseData.energy,
-        gas: Math.random() * baseData.gas,
-        phone: Math.random() * baseData.phone
+        name: user.name,
+        data: [
+            { name: "energy", data: [Math.random() * user.maxVals.energy]},
+            { name: "gas", data: [Math.random() * user.maxVals.gas]},
+            { name: "phone", data: [Math.random() * user.maxVals.phone]}
+        ]
     });
 });
 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The power of RXJS</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row main">
+            <div class="col col-sm-3 users">
+                <input type="text" id="search" class="form-control" placeholder="search"/>
+                <div id="spinner"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>
+                <div id="error">Errore...</div>
+                <ul id="users-list" class="list-group"></ul>
+            </div>
+            <div id="dashboard" class="col col-sm-9">
+                <div class="row">
+                    <div class="col col-md-12">
+                        <div id="chart"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-md-12">
+                        <div id="meter"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="bundle.js"></script>
+    <script>
+        let app = new biz.BizLogic();
+    </script>
+</body>
+</html>
