@@ -112,13 +112,4 @@ export function showError(val) {
 
 export function showDashboard(val) {
     document.getElementById('dashboard').style.visibility = val ? "visible" : "hidden";
-}
-
-export async function demo(url){
-    const users = await fetch(`${url}users`).then(x => x.json());
-    drawUsers(users);
-    const user = await fetch(`${url}users/${users[0].id}`).then(x => x.json());
-    drawChart(user);
-    // const meter = await fetch(`${url}users/${users[0].id}/now`).then(x => x.json());
-    // drawMeter(meter);
-}
+} 
